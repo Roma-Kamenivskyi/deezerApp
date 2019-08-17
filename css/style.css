@@ -1,0 +1,29 @@
+img {
+  max-width: 100%;
+}
+
+.sound-item {
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch;
+}
+.sound__inner {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+}
+.artist-description {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 17px;
+}
+.rank {
+  font-weight: 600;
+}
+.load-more {
+  display: none;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
