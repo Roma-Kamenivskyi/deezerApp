@@ -1,0 +1,76 @@
+img {
+  max-width: 100%;
+}
+body {
+  position: relative;
+  min-height: 800px;
+  height: 100%;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(45deg, #3a3897, #a3a1ff) no-repeat;
+    z-index: -1;
+  }
+}
+.search-title {
+  font-family: "Segoe script", cursive;
+  text-align: center;
+  color: #a2a0fe;
+}
+.sound {
+  &:hover {
+    background-color: black;
+  }
+  //   &__inner {
+  //     width: 90%;
+  //     display: flex;
+  //     justify-content: space-between;
+  //     align-items: center;
+  //   }
+  &__title {
+    font-size: 16px;
+    margin-bottom: 0;
+  }
+}
+
+.list-group-item {
+  padding: 10px;
+}
+.artist-description {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 17px;
+}
+#searchText {
+  border-radius: 18px;
+  background-color: #ced4da;
+  &:hover {
+    background-color: #ffffff;
+  }
+  &:focus {
+  }
+}
+.rank {
+  font-weight: 600;
+}
+.load-more {
+  display: none;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.table-dark {
+  td,
+  th {
+    vertical-align: middle;
+  }
+}
+.movies {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}

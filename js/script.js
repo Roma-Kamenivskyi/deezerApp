@@ -1,18 +1,19 @@
 // variables
 const searchForm = document.getElementById("searchForm");
-const moviesWrapper = document.querySelector(".movies");
+const moviesWrapper = document.querySelector(".movies tbody");
 const searchText = document.querySelector("#searchText");
 const buttonNext = document.querySelector("#buttonNext");
+let counter = 1;
 // Event listeners
 searchForm.addEventListener("submit", apiSearch);
 
 // Functions
 
 function apiSearch(event) {
+  event.preventDefault();
   const server = `https://cors-anywhere.herokuapp.com/https://api.deezer.com/search?q=${
     searchText.value
   }`;
-  event.preventDefault();
   fetch(server)
     .then(value => {
       if (value.status !== 200) {
@@ -24,7 +25,7 @@ function apiSearch(event) {
       renderMusic(obj);
     })
     .catch(reason => {
-      movie.innerHTML = "Упс что-то пошло не так!";
+      moviesWrapper.innerHTML = "Упс что-то пошло не так!";
       console.log("error:" + reason.status);
     });
 }
@@ -32,22 +33,31 @@ function apiSearch(event) {
 function renderMusic(obj) {
   console.log(obj);
   let output = "";
+  counter = 1;
 
   obj.data.forEach(function(sound) {
     output += `
-      <div class="col-md-6 mb-3 sound-item" data-id="${sound.id}">
-        <div class="img-wrapper">
-          <img class="mb-3" src="${sound.album.cover_medium}"/>        
-        </div>
-        <div class="sound__inner">
-          <h4>${sound.title_short}</h4>
-          <div class="artist-description">
-            <span>Artist: ${sound.artist.name}</span>
-            <span class="rank">Rank: ${sound.rank}</span>
-          </div>
+      <tr class="sound" data-id="${sound.id}">
+        <th scope="col">${counter++}</th>
+        <td scope="col">
+          <a href="#" class="img-wrapper">
+            <img src="${sound.album.cover_small}"/>        
+          </a>
+        </td>
+        <td scope="col">
+          <a href="#" class="sound__title">${sound.title_short}</a>
+        </td>
+        <td scope="col">
+          <span>${sound.artist.name}</span>
+        </td>
+        <td>
+          <span class="rank">${sound.rank}</span>
+        </td>
+        <td>${sound.album.title}</td>
+        <td scope="col">
           <audio controls src="${sound.preview}"></audio>
-        </div>
-      </div>
+        </td>
+      </tr>
     `;
   });
   moviesWrapper.innerHTML = output;
@@ -62,23 +72,31 @@ function renderMusic(obj) {
 
 function renderNext(obj) {
   obj.data.forEach(function(sound) {
-    const div = document.createElement("div");
-    div.className = "col-md-6 mb-3 sound-item";
-    div.dataset.id = sound.id;
-    div.innerHTML = `
-      <div class="img-wrapper">
-        <img class="mb-3" src="${sound.album.cover_medium}"/>        
-      </div>
-      <div class="sound__inner">
-        <h4>${sound.title_short}</h4>
-        <div class="artist-description">
-          <span>Artist: ${sound.artist.name}</span>
-          <span class="rank">Rank: ${sound.rank}</span>
-        </div>
+    const li = document.createElement("tr");
+    li.className = "sound";
+    li.dataset.id = sound.id;
+    li.innerHTML = `
+      <th scope="col">${counter++}</th>
+      <td scope="col">
+        <a href="#" class="img-wrapper">
+          <img src="${sound.album.cover_small}"/>        
+        </a>
+      </td>
+      <td scope="col">
+        <a href="#" class="sound__title">${sound.title_short}</a>
+      </td>
+      <td scope="col">
+        <span>${sound.artist.name}</span>
+      </td>
+      <td>
+        <span class="rank">${sound.rank}</span>
+      </td>
+      <td>${sound.album.title}</td>
+      <td scope="col">
         <audio controls src="${sound.preview}"></audio>
-      </div>
+      </td>
     `;
-    moviesWrapper.append(div);
+    moviesWrapper.append(li);
   });
 
   if (obj.next) {
@@ -103,7 +121,7 @@ function loadMore(obj) {
         renderNext(obj);
       })
       .catch(reason => {
-        movie.innerHTML = "Упс что-то пошло не так!";
+        moviesWrapper.innerHTML = "Упс что-то пошло не так!";
         console.log("error:" + reason.status);
       });
   });

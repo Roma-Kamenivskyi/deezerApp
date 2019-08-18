@@ -15,22 +15,47 @@
   </head>
   <body>
     <div class="container">
-      <div class="jumbotron">
-        <h1 class="text-center">Find films</h1>
+      <div class="jumbotron bg-dark">
+        <h1 class="search-title mb-3">Шукати музику</h1>
         <form action="" id="searchForm">
           <input
             type="text"
             class="form-control"
             id="searchText"
-            placeholder="Find films"
+            placeholder="Знайти гудок"
           />
         </form>
       </div>
     </div>
     <div class="container-fluid">
-      <div class="movies row text-left"></div>
+      <table
+        class="movies table-responsive-xl table table-hover table-dark text-left"
+      >
+        <thead class="table-head">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Обгортка</th>
+            <th scope="col">Трек</th>
+            <th scope="col">Виконавець</th>
+            <th scope="col">Голосів</th>
+            <th scope="col">Альбом</th>
+            <th scope="col">Плеєр</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="col">1</th>
+            <td scope="col">Mark</td>
+            <td scope="col">Otto</td>
+            <td scope="col">23</td>
+            <td scope="col">23</td>
+            <td scope="col">423</td>
+            <td scope="col">2332</td>
+          </tr>
+        </tbody>
+      </table>
       <button class="load-more btn btn-dark mt-4" id="buttonNext">
-        Load more
+        Загрузити більше
       </button>
     </div>
 
